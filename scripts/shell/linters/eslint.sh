@@ -2,8 +2,12 @@
 set -euo pipefail
 ERROR_FOUND=0
 
+ESLINT_CONFIGS=(
+  ".eslintrc.json" ".eslintrc.js" ".eslintrc.yml" ".eslintrc.yaml"
+  "eslint.config.js" "eslint.config.mjs" "eslint.config.cjs"
+)
 CONFIG_FOUND=0
-for config in ".eslintrc.json" ".eslintrc.js" ".eslintrc.yml" ".eslintrc.yaml" "eslint.config.js" "eslint.config.mjs" "eslint.config.cjs"; do
+for config in "${ESLINT_CONFIGS[@]}"; do
   if [ -f "$config" ]; then
     CONFIG_FOUND=1
     break
@@ -15,7 +19,9 @@ if [ $CONFIG_FOUND -eq 0 ]; then
   exit 1
 fi
 
-mapfile -t js_files < <(find . -type f \( -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.mjs" -o -name "*.cjs" \) \
+mapfile -t js_files < <(find . -type f \
+  \( -name "*.js" -o -name "*.jsx" -o -name "*.ts" \
+     -o -name "*.tsx" -o -name "*.mjs" -o -name "*.cjs" \) \
   -not -path "./_site/*" \
   -not -path "./node_modules/*" \
   -not -path "./.git/*")
