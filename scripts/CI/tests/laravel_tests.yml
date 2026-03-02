@@ -1,0 +1,39 @@
+tests:
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: "8.2"
+        extensions: mbstring, pdo, sqlite, bcmath
+
+    - name: Cache Composer
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: composer-${{ hashFiles('composer.lock') }}
+        restore-keys: composer-
+
+    - name: Install dependencies
+      run: composer install --no-interaction --prefer-dist
+
+    - name: Ensure ParaTest 7.x is installed
+      run: composer require --dev brianium/paratest:^7.0 --no-interaction
+
+    - name: Prepare Laravel with SQLite
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+        # создаем файл базы для параллельных процессов
+        touch database/testing.sqlite
+        echo "DB_CONNECTION=sqlite" >> .env
+        echo "DB_DATABASE=${GITHUB_WORKSPACE}/database/testing.sqlite" >> .env
+
+    - name: Run migrations
+      run: php artisan migrate --force
+
+    - name: Run tests in parallel with isolation
+      run: php artisan test
