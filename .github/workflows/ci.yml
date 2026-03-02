@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Run ShellCheck on scripts
+        run: |
+          ERROR_FOUND=0
+          DIRS=("scripts" "docker/scripts")
+
+          for DIR in "${DIRS[@]}"; do
+            if [ ! -d "$DIR" ]; then
+              echo "⚠️ Directory $DIR does not exist. Skipping."
+              continue
+            fi
+
+            echo "ℹ️ Checking directory: $DIR"
+
+            sh_files=$(find "$DIR" -type f -name "*.sh")
+            if [ -z "$sh_files" ]; then
+              echo "No .sh files found in $DIR"
+              continue
+            fi
+
+            for file in $sh_files; do
+              echo "ℹ️ Checking $file..."
+              shellcheck --severity=warning "$file" || ERROR_FOUND=1
+            done
+          done
+
+          if [[ $ERROR_FOUND -eq 0 ]]; then
+            echo "✅ All shell scripts passed important ShellCheck checks!"
+          else
+            echo "❌ ShellCheck found important issues!"
+            exit 1
+          fi
+
+  bats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install bats-core
+        run: |
+          git clone https://github.com/bats-core/bats-core.git /tmp/bats-core
+          sudo /tmp/bats-core/install.sh /usr/local
+
+      - name: Run BATS tests
+        run: bats --recursive tests/
+
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble CI files
+        run: |
+          bash scripts/assemble-ci.sh scripts/CI/linters        scripts/shell/linters        CI/linters
+          bash scripts/assemble-ci.sh scripts/CI/static_analysis scripts/shell/static_analysis CI/static_analysis
+          bash scripts/assemble-ci.sh scripts/CI/tests           scripts/shell/tests           CI/tests
+
+      - name: Verify CI/ is up to date
+        run: |
+          if ! git diff --exit-code CI/; then
+            echo "::error::CI/ is out of date. Run the assembler and commit the changes."
+            exit 1
+          fi
