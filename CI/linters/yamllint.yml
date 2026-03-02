@@ -17,7 +17,8 @@ yamllint:
         mapfile -t yaml_files < <(find . -type f \( -name "*.yml" -o -name "*.yaml" \) \
           -not -path "./_site/*" \
           -not -path "./node_modules/*" \
-          -not -path "./.git/*")
+          -not -path "./.git/*" \
+          -not -name ".yamllint.yml")
 
         if [ ${#yaml_files[@]} -eq 0 ]; then
           echo "⚠️ No YAML files found. Skipping."
