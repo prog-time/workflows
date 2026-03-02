@@ -61,7 +61,7 @@ See existing tests in `tests/linters/` for examples.
       run: bash scripts/shell/<category>/<tool>.sh
 ```
 
-**4. Assemble and verify**
+**4. Assemble and verify** — generate the output file and check it's committed:
 
 ```bash
 bash scripts/assemble-ci.sh scripts/CI/<category> scripts/shell/<category> CI/<category>
