@@ -1,0 +1,8 @@
+yamllint:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - name: Install yamllint
+      run: pip install yamllint
+    - name: Run yamllint
+      run: bash scripts/shell/linters/yamllint.sh
