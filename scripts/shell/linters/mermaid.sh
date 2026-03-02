@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ERROR_FOUND=0
+
+mapfile -t mmd_files < <(find . -type f -name "*.mmd" \
+  -not -path "./node_modules/*" \
+  -not -path "./.git/*")
+
+if [ ${#mmd_files[@]} -eq 0 ]; then
+  echo "⚠️ No .mmd files found. Skipping."
+  exit 0
+fi
+
+PUPPETEER_CONFIG=$(mktemp /tmp/puppeteer-XXXXXX.json)
+echo '{"args":["--no-sandbox"]}' > "$PUPPETEER_CONFIG"
+trap 'rm -f "$PUPPETEER_CONFIG"' EXIT
+
+OUT_DIR=$(mktemp -d /tmp/mermaid-XXXXXX)
+trap 'rm -rf "$OUT_DIR"' EXIT
+
+for file in "${mmd_files[@]}"; do
+  echo "ℹ️ Checking ${file#./}..."
+  mmdc -i "$file" -o "${OUT_DIR}/out.svg" -p "$PUPPETEER_CONFIG" || ERROR_FOUND=1
+done
+
+if [[ $ERROR_FOUND -eq 0 ]]; then
+  echo "✅ All .mmd files passed mermaid syntax check!"
+else
+  echo "❌ mermaid-cli found syntax errors!"
+  exit 1
+fi

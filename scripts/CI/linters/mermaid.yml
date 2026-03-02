@@ -1,0 +1,8 @@
+mermaid:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - name: Install mermaid-cli
+      run: npm install -g @mermaid-js/mermaid-cli
+    - name: Run mermaid syntax check
+      run: bash scripts/shell/linters/mermaid.sh
