@@ -5,6 +5,25 @@ that projects compose into their own workflows.
 
 ---
 
+## Snippets
+
+| Tool | Category | File |
+|------|----------|------|
+| ESLint | linters | [CI/linters/eslint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/eslint.yml) |
+| Hadolint | linters | [CI/linters/hadolint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/hadolint.yml) |
+| HTMLHint | linters | [CI/linters/htmlhint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/htmlhint.yml) |
+| markdownlint | linters | [CI/linters/markdownlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/markdownlint.yml) |
+| mermaid-cli | linters | [CI/linters/mermaid.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/mermaid.yml) |
+| ShellCheck | linters | [CI/linters/shellcheck.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/shellcheck.yml) |
+| Stylelint | linters | [CI/linters/stylelint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/stylelint.yml) |
+| yamllint | linters | [CI/linters/yamllint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/yamllint.yml) |
+| PHPStan | static_analysis | [CI/static_analysis/phpstan.yml](https://github.com/prog-time/workflows/blob/main/CI/static_analysis/phpstan.yml) |
+| mermaid-cli | build | [CI/build/mermaid.yml](https://github.com/prog-time/workflows/blob/main/CI/build/mermaid.yml) |
+| BATS | tests | [CI/tests/bats.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/bats.yml) |
+| Laravel | tests | [CI/tests/laravel_tests.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/laravel_tests.yml) |
+
+---
+
 ## How it works
 
 The project uses a three-layer architecture:
