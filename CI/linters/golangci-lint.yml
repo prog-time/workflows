@@ -1,0 +1,31 @@
+golangci-lint:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: stable
+
+    - name: Install golangci-lint
+      run: >
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh
+        | sh -s -- -b "$(go env GOPATH)/bin" v1.57.2
+
+    - name: Run golangci-lint
+      run: |
+        set -euo pipefail
+
+        go_files=$(find . -type f -name "*.go" \
+          -not -path "./.git/*" \
+          -not -path "./vendor/*")
+
+        if [ -z "$go_files" ]; then
+          echo "⚠️ No .go files found. Skipping."
+          exit 0
+        fi
+
+        echo "ℹ️ Running golangci-lint..."
+        golangci-lint run ./...
+        echo "✅ All Go files passed golangci-lint checks!"
