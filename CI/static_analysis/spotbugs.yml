@@ -1,0 +1,21 @@
+spotbugs:
+  runs-on: ubuntu-latest
+  timeout-minutes: 10
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: "17"
+        distribution: temurin
+
+    - name: Cache Maven
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2/repository
+        key: maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: maven-
+
+    - name: Run SpotBugs via Maven
+      run: mvn spotbugs:check --no-transfer-progress
