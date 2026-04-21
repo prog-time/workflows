@@ -9,6 +9,7 @@ that projects compose into their own workflows.
 
 | Tool | Category | File |
 |------|----------|------|
+| gitleaks | security | [CI/security/gitleaks.yml](https://github.com/prog-time/workflows/blob/main/CI/security/gitleaks.yml) |
 | ESLint | linters | [CI/linters/eslint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/eslint.yml) |
 | golangci-lint | linters | [CI/linters/golangci-lint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/golangci-lint.yml) |
 | Hadolint | linters | [CI/linters/hadolint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/hadolint.yml) |
@@ -78,6 +79,8 @@ Workflows/
 │   │   │   ├── stylelint.yml
 │   │   │   ├── swiftlint.yml
 │   │   │   └── yamllint.yml
+│   │   ├── security/
+│   │   │   └── gitleaks.yml
 │   │   ├── static_analysis/
 │   │   │   ├── mypy.yml
 │   │   │   ├── phpstan.yml
@@ -89,23 +92,26 @@ Workflows/
 │   │       ├── pytest.yml
 │   │       └── rspec.yml
 │   └── shell/                      # bash scripts (one per tool)
-│       └── linters/
-│           ├── eslint.sh
-│           ├── golangci-lint.sh
-│           ├── hadolint.sh
-│           ├── htmlhint.sh
-│           ├── ktlint.sh
-│           ├── markdownlint.sh
-│           ├── mermaid.sh
-│           ├── rubocop.sh
-│           ├── ruff.sh
-│           ├── shellcheck.sh
-│           ├── stylelint.sh
-│           ├── swiftlint.sh
-│           └── yamllint.sh
+│       ├── linters/
+│       │   ├── eslint.sh
+│       │   ├── golangci-lint.sh
+│       │   ├── hadolint.sh
+│       │   ├── htmlhint.sh
+│       │   ├── ktlint.sh
+│       │   ├── markdownlint.sh
+│       │   ├── mermaid.sh
+│       │   ├── rubocop.sh
+│       │   ├── ruff.sh
+│       │   ├── shellcheck.sh
+│       │   ├── stylelint.sh
+│       │   ├── swiftlint.sh
+│       │   └── yamllint.sh
+│       └── security/
+│           └── gitleaks.sh
 │
 ├── CI/                             # assembled output (ready to use)
 │   ├── linters/
+│   ├── security/
 │   ├── static_analysis/
 │   └── tests/
 │
@@ -118,6 +124,8 @@ Workflows/
 │   │   ├── shellcheck.bats
 │   │   ├── stylelint.bats
 │   │   └── yamllint.bats
+│   ├── security/
+│   │   └── gitleaks.bats
 │   └── helpers/
 │       └── common.bash             # shared test utilities (mocks, temp dirs)
 │
@@ -137,6 +145,7 @@ Run the assembler for each category:
 
 ```bash
 bash scripts/assemble-ci.sh scripts/CI/linters        scripts/shell/linters        CI/linters
+bash scripts/assemble-ci.sh scripts/CI/security       scripts/shell/security       CI/security
 bash scripts/assemble-ci.sh scripts/CI/static_analysis scripts/shell/static_analysis CI/static_analysis
 bash scripts/assemble-ci.sh scripts/CI/tests           scripts/shell/tests           CI/tests
 ```
@@ -184,6 +193,12 @@ shellcheck:
 ---
 
 ## Available snippets
+
+### Security
+
+| Snippet | Tool | What it checks |
+|---------|------|----------------|
+| `CI/security/gitleaks.yml` | [gitleaks](https://github.com/gitleaks/gitleaks) | Hardcoded secrets, tokens, and API keys |
 
 ### Linters
 
