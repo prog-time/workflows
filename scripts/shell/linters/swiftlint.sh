@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ERROR_FOUND=0
+
+mapfile -t swift_files < <(find . -type f -name "*.swift" \
+  -not -path "./.git/*" \
+  -not -path "./.build/*")
+
+if [ ${#swift_files[@]} -eq 0 ]; then
+  echo "⚠️ No .swift files found. Skipping."
+  exit 0
+fi
+
+for file in "${swift_files[@]}"; do
+  echo "ℹ️ Checking ${file#./}..."
+  swiftlint lint --path "$file" || ERROR_FOUND=1
+done
+
+if [[ $ERROR_FOUND -eq 0 ]]; then
+  echo "✅ All Swift files passed SwiftLint checks!"
+else
+  echo "❌ SwiftLint found issues!"
+  exit 1
+fi
