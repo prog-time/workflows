@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ERROR_FOUND=0
+
+mapfile -t py_files < <(find . -type f -name "*.py" \
+  -not -path "./.git/*" \
+  -not -path "./.venv/*" \
+  -not -path "./venv/*" \
+  -not -path "./node_modules/*")
+
+if [ ${#py_files[@]} -eq 0 ]; then
+  echo "⚠️ No .py files found. Skipping."
+  exit 0
+fi
+
+for file in "${py_files[@]}"; do
+  echo "ℹ️ Checking ${file#./}..."
+  ruff check "$file" || ERROR_FOUND=1
+done
+
+if [[ $ERROR_FOUND -eq 0 ]]; then
+  echo "✅ All Python files passed Ruff checks!"
+else
+  echo "❌ Ruff found issues!"
+  exit 1
+fi

@@ -10,17 +10,27 @@ that projects compose into their own workflows.
 | Tool | Category | File |
 |------|----------|------|
 | ESLint | linters | [CI/linters/eslint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/eslint.yml) |
+| golangci-lint | linters | [CI/linters/golangci-lint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/golangci-lint.yml) |
 | Hadolint | linters | [CI/linters/hadolint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/hadolint.yml) |
 | HTMLHint | linters | [CI/linters/htmlhint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/htmlhint.yml) |
+| ktlint | linters | [CI/linters/ktlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/ktlint.yml) |
 | markdownlint | linters | [CI/linters/markdownlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/markdownlint.yml) |
 | mermaid-cli | linters | [CI/linters/mermaid.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/mermaid.yml) |
+| RuboCop | linters | [CI/linters/rubocop.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/rubocop.yml) |
+| Ruff | linters | [CI/linters/ruff.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/ruff.yml) |
 | ShellCheck | linters | [CI/linters/shellcheck.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/shellcheck.yml) |
 | Stylelint | linters | [CI/linters/stylelint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/stylelint.yml) |
+| SwiftLint | linters | [CI/linters/swiftlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/swiftlint.yml) |
 | yamllint | linters | [CI/linters/yamllint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/yamllint.yml) |
+| mypy | static_analysis | [CI/static_analysis/mypy.yml](https://github.com/prog-time/workflows/blob/main/CI/static_analysis/mypy.yml) |
 | PHPStan | static_analysis | [CI/static_analysis/phpstan.yml](https://github.com/prog-time/workflows/blob/main/CI/static_analysis/phpstan.yml) |
+| SpotBugs | static_analysis | [CI/static_analysis/spotbugs.yml](https://github.com/prog-time/workflows/blob/main/CI/static_analysis/spotbugs.yml) |
 | mermaid-cli | build | [CI/build/mermaid.yml](https://github.com/prog-time/workflows/blob/main/CI/build/mermaid.yml) |
 | BATS | tests | [CI/tests/bats.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/bats.yml) |
+| go test | tests | [CI/tests/go_test.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/go_test.yml) |
 | Laravel | tests | [CI/tests/laravel_tests.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/laravel_tests.yml) |
+| pytest | tests | [CI/tests/pytest.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/pytest.yml) |
+| RSpec | tests | [CI/tests/rspec.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/rspec.yml) |
 
 ---
 
@@ -55,24 +65,43 @@ Workflows/
 │   ├── assemble-ci.sh              # assembles source YAMLs → CI/
 │   ├── CI/                         # source YAML templates
 │   │   ├── linters/
+│   │   │   ├── eslint.yml
+│   │   │   ├── golangci-lint.yml
 │   │   │   ├── hadolint.yml
 │   │   │   ├── htmlhint.yml
+│   │   │   ├── ktlint.yml
 │   │   │   ├── markdownlint.yml
+│   │   │   ├── mermaid.yml
+│   │   │   ├── rubocop.yml
+│   │   │   ├── ruff.yml
 │   │   │   ├── shellcheck.yml
 │   │   │   ├── stylelint.yml
+│   │   │   ├── swiftlint.yml
 │   │   │   └── yamllint.yml
 │   │   ├── static_analysis/
-│   │   │   └── phpstan.yml
+│   │   │   ├── mypy.yml
+│   │   │   ├── phpstan.yml
+│   │   │   └── spotbugs.yml
 │   │   └── tests/
 │   │       ├── bats.yml
-│   │       └── laravel_tests.yml
+│   │       ├── go_test.yml
+│   │       ├── laravel_tests.yml
+│   │       ├── pytest.yml
+│   │       └── rspec.yml
 │   └── shell/                      # bash scripts (one per tool)
 │       └── linters/
+│           ├── eslint.sh
+│           ├── golangci-lint.sh
 │           ├── hadolint.sh
 │           ├── htmlhint.sh
+│           ├── ktlint.sh
 │           ├── markdownlint.sh
+│           ├── mermaid.sh
+│           ├── rubocop.sh
+│           ├── ruff.sh
 │           ├── shellcheck.sh
 │           ├── stylelint.sh
+│           ├── swiftlint.sh
 │           └── yamllint.sh
 │
 ├── CI/                             # assembled output (ready to use)
@@ -160,25 +189,37 @@ shellcheck:
 
 | Snippet | Tool | What it checks |
 |---------|------|----------------|
+| `CI/linters/eslint.yml` | [eslint](https://eslint.org) | JavaScript / TypeScript |
+| `CI/linters/golangci-lint.yml` | [golangci-lint](https://golangci-lint.run) | Go |
 | `CI/linters/hadolint.yml` | [hadolint](https://github.com/hadolint/hadolint) | Dockerfiles |
 | `CI/linters/htmlhint.yml` | [htmlhint](https://htmlhint.com) | HTML files |
+| `CI/linters/ktlint.yml` | [ktlint](https://pinterest.github.io/ktlint) | Kotlin |
 | `CI/linters/markdownlint.yml` | [markdownlint](https://github.com/DavidAnson/markdownlint) | Markdown files |
+| `CI/linters/mermaid.yml` | [mermaid-cli](https://github.com/mermaid-js/mermaid-cli) | Mermaid diagrams |
+| `CI/linters/rubocop.yml` | [rubocop](https://rubocop.org) | Ruby |
+| `CI/linters/ruff.yml` | [ruff](https://docs.astral.sh/ruff) | Python |
 | `CI/linters/shellcheck.yml` | [shellcheck](https://www.shellcheck.net) | Shell scripts |
 | `CI/linters/stylelint.yml` | [stylelint](https://stylelint.io) | CSS / SCSS / LESS |
+| `CI/linters/swiftlint.yml` | [swiftlint](https://realm.github.io/SwiftLint) | Swift |
 | `CI/linters/yamllint.yml` | [yamllint](https://yamllint.readthedocs.io) | YAML files |
 
 ### Static analysis
 
 | Snippet | Tool | What it checks |
 |---------|------|----------------|
+| `CI/static_analysis/mypy.yml` | [mypy](https://mypy-lang.org) | Python (type checking) |
 | `CI/static_analysis/phpstan.yml` | [PHPStan](https://phpstan.org) | PHP (level from `phpstan.neon`) |
+| `CI/static_analysis/spotbugs.yml` | [SpotBugs](https://spotbugs.github.io) | Java (via Maven) |
 
 ### Tests
 
 | Snippet | What it runs |
 |---------|--------------|
 | `CI/tests/bats.yml` | BATS tests (`tests/` directory) |
+| `CI/tests/go_test.yml` | Go test suite (`go test ./...`) |
 | `CI/tests/laravel_tests.yml` | Laravel test suite (PHP 8.2, SQLite, parallel) |
+| `CI/tests/pytest.yml` | Python test suite (pytest) |
+| `CI/tests/rspec.yml` | Ruby test suite (RSpec via Bundler) |
 
 ---
 
