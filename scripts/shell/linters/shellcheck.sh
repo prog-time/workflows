@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 ERROR_FOUND=0
 DIRS=("scripts" "docker/scripts")
 

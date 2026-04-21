@@ -8,6 +8,7 @@ shellcheck:
 
     - name: Run ShellCheck on scripts
       run: |
+        set -euo pipefail
         ERROR_FOUND=0
         DIRS=("scripts" "docker/scripts")
 
