@@ -36,6 +36,7 @@ that projects compose into their own workflows.
 | SpotBugs | static_analysis | [CI/static_analysis/spotbugs.yml](https://github.com/prog-time/workflows/blob/main/CI/static_analysis/spotbugs.yml) |
 | mermaid-cli | build | [CI/build/mermaid.yml](https://github.com/prog-time/workflows/blob/main/CI/build/mermaid.yml) |
 | BATS | tests | [CI/tests/bats.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/bats.yml) |
+| cargo test | tests | [CI/tests/cargo_test.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/cargo_test.yml) |
 | go test | tests | [CI/tests/go_test.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/go_test.yml) |
 | Jest | tests | [CI/tests/jest.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/jest.yml) |
 | Laravel | tests | [CI/tests/laravel_tests.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/laravel_tests.yml) |
@@ -104,6 +105,7 @@ Workflows/
 │   │   │   └── spotbugs.yml
 │   │   └── tests/
 │   │       ├── bats.yml
+│   │       ├── cargo_test.yml
 │   │       ├── go_test.yml
 │   │       ├── jest.yml
 │   │       ├── laravel_tests.yml
@@ -135,6 +137,7 @@ Workflows/
 │       │   ├── semgrep.sh
 │       │   └── trivy.sh
 │       └── tests/
+│           ├── cargo_test.sh
 │           └── jest.sh
 │
 ├── CI/                             # assembled output (ready to use)
@@ -163,6 +166,7 @@ Workflows/
 │   │   ├── semgrep.bats
 │   │   └── trivy.bats
 │   ├── tests/
+│   │   ├── cargo_test.bats
 │   │   └── jest.bats
 │   └── helpers/
 │       └── common.bash             # shared test utilities (mocks, temp dirs)
@@ -277,6 +281,7 @@ shellcheck:
 | Snippet | What it runs |
 |---------|--------------|
 | `CI/tests/bats.yml` | BATS tests (`tests/` directory) |
+| `CI/tests/cargo_test.yml` | Rust test suite (`cargo test --all-features --verbose`) |
 | `CI/tests/go_test.yml` | Go test suite (`go test ./...`) |
 | `CI/tests/jest.yml` | JavaScript/TypeScript test suite (Jest) |
 | `CI/tests/laravel_tests.yml` | Laravel test suite (PHP 8.2, SQLite, parallel) |
