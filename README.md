@@ -12,6 +12,7 @@ that projects compose into their own workflows.
 | gitleaks | security | [CI/security/gitleaks.yml](https://github.com/prog-time/workflows/blob/main/CI/security/gitleaks.yml) |
 | trivy | security | [CI/security/trivy.yml](https://github.com/prog-time/workflows/blob/main/CI/security/trivy.yml) |
 | semgrep | security | [CI/security/semgrep.yml](https://github.com/prog-time/workflows/blob/main/CI/security/semgrep.yml) |
+| Clippy | linters | [CI/linters/clippy.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/clippy.yml) |
 | ESLint | linters | [CI/linters/eslint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/eslint.yml) |
 | golangci-lint | linters | [CI/linters/golangci-lint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/golangci-lint.yml) |
 | Hadolint | linters | [CI/linters/hadolint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/hadolint.yml) |
@@ -68,6 +69,7 @@ Workflows/
 │   ├── assemble-ci.sh              # assembles source YAMLs → CI/
 │   ├── CI/                         # source YAML templates
 │   │   ├── linters/
+│   │   │   ├── clippy.yml
 │   │   │   ├── eslint.yml
 │   │   │   ├── golangci-lint.yml
 │   │   │   ├── hadolint.yml
@@ -97,6 +99,7 @@ Workflows/
 │   │       └── rspec.yml
 │   └── shell/                      # bash scripts (one per tool)
 │       ├── linters/
+│       │   ├── clippy.sh
 │       │   ├── eslint.sh
 │       │   ├── golangci-lint.sh
 │       │   ├── hadolint.sh
@@ -124,6 +127,7 @@ Workflows/
 ├── tests/
 │   ├── assemble-ci.bats            # tests for the assembler
 │   ├── linters/                    # unit tests for each shell script
+│   │   ├── clippy.bats
 │   │   ├── hadolint.bats
 │   │   ├── htmlhint.bats
 │   │   ├── markdownlint.bats
@@ -214,6 +218,7 @@ shellcheck:
 
 | Snippet | Tool | What it checks |
 |---------|------|----------------|
+| `CI/linters/clippy.yml` | [clippy](https://github.com/rust-lang/rust-clippy) | Rust |
 | `CI/linters/eslint.yml` | [eslint](https://eslint.org) | JavaScript / TypeScript |
 | `CI/linters/golangci-lint.yml` | [golangci-lint](https://golangci-lint.run) | Go |
 | `CI/linters/hadolint.yml` | [hadolint](https://github.com/hadolint/hadolint) | Dockerfiles |
