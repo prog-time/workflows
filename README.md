@@ -24,6 +24,7 @@ that projects compose into their own workflows.
 | RuboCop | linters | [CI/linters/rubocop.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/rubocop.yml) |
 | Ruff | linters | [CI/linters/ruff.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/ruff.yml) |
 | ShellCheck | linters | [CI/linters/shellcheck.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/shellcheck.yml) |
+| SQLFluff | linters | [CI/linters/sqlfluff.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/sqlfluff.yml) |
 | Stylelint | linters | [CI/linters/stylelint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/stylelint.yml) |
 | SwiftLint | linters | [CI/linters/swiftlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/swiftlint.yml) |
 | yamllint | linters | [CI/linters/yamllint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/yamllint.yml) |
@@ -83,6 +84,7 @@ Workflows/
 │   │   │   ├── rubocop.yml
 │   │   │   ├── ruff.yml
 │   │   │   ├── shellcheck.yml
+│   │   │   ├── sqlfluff.yml
 │   │   │   ├── stylelint.yml
 │   │   │   ├── swiftlint.yml
 │   │   │   └── yamllint.yml
@@ -115,6 +117,7 @@ Workflows/
 │       │   ├── rubocop.sh
 │       │   ├── ruff.sh
 │       │   ├── shellcheck.sh
+│       │   ├── sqlfluff.sh
 │       │   ├── stylelint.sh
 │       │   ├── swiftlint.sh
 │       │   └── yamllint.sh
@@ -140,6 +143,7 @@ Workflows/
 │   │   ├── markdownlint.bats
 │   │   ├── phpcs.bats
 │   │   ├── shellcheck.bats
+│   │   ├── sqlfluff.bats
 │   │   ├── stylelint.bats
 │   │   └── yamllint.bats
 │   ├── security/
@@ -240,6 +244,7 @@ shellcheck:
 | `CI/linters/rubocop.yml` | [rubocop](https://rubocop.org) | Ruby |
 | `CI/linters/ruff.yml` | [ruff](https://docs.astral.sh/ruff) | Python |
 | `CI/linters/shellcheck.yml` | [shellcheck](https://www.shellcheck.net) | Shell scripts |
+| `CI/linters/sqlfluff.yml` | [sqlfluff](https://sqlfluff.com) | SQL files |
 | `CI/linters/stylelint.yml` | [stylelint](https://stylelint.io) | CSS / SCSS / LESS |
 | `CI/linters/swiftlint.yml` | [swiftlint](https://realm.github.io/SwiftLint) | Swift |
 | `CI/linters/yamllint.yml` | [yamllint](https://yamllint.readthedocs.io) | YAML files |
