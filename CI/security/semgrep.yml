@@ -1,0 +1,36 @@
+semgrep:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Cache Semgrep
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/semgrep
+        key: semgrep-${{ runner.os }}-${{ hashFiles('**/.semgrepignore') }}
+
+    - name: Install Semgrep
+      run: pip install semgrep==1.72.0
+
+    - name: Run Semgrep
+      run: |
+        set -euo pipefail
+
+        if ! command -v semgrep &> /dev/null; then
+          echo "::error::semgrep not found. Install it before running this script."
+          exit 1
+        fi
+
+        echo "ℹ️ Running Semgrep static analysis..."
+
+        if semgrep --config p/default --error .; then
+          echo "✅ Semgrep passed"
+          exit 0
+        else
+          echo "❌ Semgrep found issues"
+          exit 1
+        fi
