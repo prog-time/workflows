@@ -1,0 +1,14 @@
+bundler-audit:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.3"
+
+    - name: Install bundler-audit
+      run: gem install bundler-audit -v 0.9.2
+
+    - name: Run bundler-audit
+      run: bash scripts/shell/security/bundler-audit.sh
