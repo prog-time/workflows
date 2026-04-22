@@ -27,6 +27,7 @@ that projects compose into their own workflows.
 | SQLFluff | linters | [CI/linters/sqlfluff.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/sqlfluff.yml) |
 | Stylelint | linters | [CI/linters/stylelint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/stylelint.yml) |
 | SwiftLint | linters | [CI/linters/swiftlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/swiftlint.yml) |
+| tflint | linters | [CI/linters/tflint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/tflint.yml) |
 | yamllint | linters | [CI/linters/yamllint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/yamllint.yml) |
 | mypy | static_analysis | [CI/static_analysis/mypy.yml](https://github.com/prog-time/workflows/blob/main/CI/static_analysis/mypy.yml) |
 | PHPStan | static_analysis | [CI/static_analysis/phpstan.yml](https://github.com/prog-time/workflows/blob/main/CI/static_analysis/phpstan.yml) |
@@ -87,6 +88,7 @@ Workflows/
 │   │   │   ├── sqlfluff.yml
 │   │   │   ├── stylelint.yml
 │   │   │   ├── swiftlint.yml
+│   │   │   ├── tflint.yml
 │   │   │   └── yamllint.yml
 │   │   ├── security/
 │   │   │   ├── gitleaks.yml
@@ -120,6 +122,7 @@ Workflows/
 │       │   ├── sqlfluff.sh
 │       │   ├── stylelint.sh
 │       │   ├── swiftlint.sh
+│       │   ├── tflint.sh
 │       │   └── yamllint.sh
 │       ├── security/
 │       │   ├── gitleaks.sh
@@ -145,6 +148,7 @@ Workflows/
 │   │   ├── shellcheck.bats
 │   │   ├── sqlfluff.bats
 │   │   ├── stylelint.bats
+│   │   ├── tflint.bats
 │   │   └── yamllint.bats
 │   ├── security/
 │   │   ├── gitleaks.bats
@@ -247,6 +251,7 @@ shellcheck:
 | `CI/linters/sqlfluff.yml` | [sqlfluff](https://sqlfluff.com) | SQL files |
 | `CI/linters/stylelint.yml` | [stylelint](https://stylelint.io) | CSS / SCSS / LESS |
 | `CI/linters/swiftlint.yml` | [swiftlint](https://realm.github.io/SwiftLint) | Swift |
+| `CI/linters/tflint.yml` | [tflint](https://github.com/terraform-linters/tflint) | Terraform |
 | `CI/linters/yamllint.yml` | [yamllint](https://yamllint.readthedocs.io) | YAML files |
 
 ### Static analysis
