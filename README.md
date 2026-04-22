@@ -11,6 +11,7 @@ that projects compose into their own workflows.
 |------|----------|------|
 | gitleaks | security | [CI/security/gitleaks.yml](https://github.com/prog-time/workflows/blob/main/CI/security/gitleaks.yml) |
 | trivy | security | [CI/security/trivy.yml](https://github.com/prog-time/workflows/blob/main/CI/security/trivy.yml) |
+| semgrep | security | [CI/security/semgrep.yml](https://github.com/prog-time/workflows/blob/main/CI/security/semgrep.yml) |
 | ESLint | linters | [CI/linters/eslint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/eslint.yml) |
 | golangci-lint | linters | [CI/linters/golangci-lint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/golangci-lint.yml) |
 | Hadolint | linters | [CI/linters/hadolint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/hadolint.yml) |
@@ -82,6 +83,7 @@ Workflows/
 │   │   │   └── yamllint.yml
 │   │   ├── security/
 │   │   │   ├── gitleaks.yml
+│   │   │   ├── semgrep.yml
 │   │   │   └── trivy.yml
 │   │   ├── static_analysis/
 │   │   │   ├── mypy.yml
@@ -110,6 +112,7 @@ Workflows/
 │       │   └── yamllint.sh
 │       └── security/
 │           ├── gitleaks.sh
+│           ├── semgrep.sh
 │           └── trivy.sh
 │
 ├── CI/                             # assembled output (ready to use)
@@ -129,6 +132,7 @@ Workflows/
 │   │   └── yamllint.bats
 │   ├── security/
 │   │   ├── gitleaks.bats
+│   │   ├── semgrep.bats
 │   │   └── trivy.bats
 │   └── helpers/
 │       └── common.bash             # shared test utilities (mocks, temp dirs)
@@ -204,6 +208,7 @@ shellcheck:
 |---------|------|----------------|
 | `CI/security/gitleaks.yml` | [gitleaks](https://github.com/gitleaks/gitleaks) | Hardcoded secrets, tokens, and API keys |
 | `CI/security/trivy.yml` | [trivy](https://github.com/aquasecurity/trivy) | CVEs in OS packages, container images, and dependency manifests |
+| `CI/security/semgrep.yml` | [semgrep](https://semgrep.dev) | OWASP Top 10 patterns and insecure coding patterns across Python, JS/TS, Go, Java, Ruby, and more |
 
 ### Linters
 
