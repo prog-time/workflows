@@ -9,6 +9,7 @@ that projects compose into their own workflows.
 
 | Tool | Category | File |
 |------|----------|------|
+| bundler-audit | security | [CI/security/bundler-audit.yml](https://github.com/prog-time/workflows/blob/main/CI/security/bundler-audit.yml) |
 | gitleaks | security | [CI/security/gitleaks.yml](https://github.com/prog-time/workflows/blob/main/CI/security/gitleaks.yml) |
 | pip-audit | security | [CI/security/pip-audit.yml](https://github.com/prog-time/workflows/blob/main/CI/security/pip-audit.yml) |
 | semgrep | security | [CI/security/semgrep.yml](https://github.com/prog-time/workflows/blob/main/CI/security/semgrep.yml) |
@@ -92,6 +93,7 @@ Workflows/
 │   │   │   ├── tflint.yml
 │   │   │   └── yamllint.yml
 │   │   ├── security/
+│   │   │   ├── bundler-audit.yml
 │   │   │   ├── gitleaks.yml
 │   │   │   ├── pip-audit.yml
 │   │   │   ├── semgrep.yml
@@ -127,6 +129,7 @@ Workflows/
 │       │   ├── tflint.sh
 │       │   └── yamllint.sh
 │       ├── security/
+│       │   ├── bundler-audit.sh
 │       │   ├── gitleaks.sh
 │       │   ├── pip-audit.sh
 │       │   ├── semgrep.sh
@@ -154,6 +157,7 @@ Workflows/
 │   │   ├── tflint.bats
 │   │   └── yamllint.bats
 │   ├── security/
+│   │   ├── bundler-audit.bats
 │   │   ├── gitleaks.bats
 │   │   ├── pip-audit.bats
 │   │   ├── semgrep.bats
@@ -232,6 +236,7 @@ shellcheck:
 
 | Snippet | Tool | What it checks |
 |---------|------|----------------|
+| `CI/security/bundler-audit.yml` | [bundler-audit](https://github.com/rubysec/bundler-audit) | CVEs in Ruby gem dependencies via the Ruby Advisory Database |
 | `CI/security/gitleaks.yml` | [gitleaks](https://github.com/gitleaks/gitleaks) | Hardcoded secrets, tokens, and API keys |
 | `CI/security/pip-audit.yml` | [pip-audit](https://github.com/pypa/pip-audit) | CVEs in Python dependencies via the PyPI Advisory Database |
 | `CI/security/semgrep.yml` | [semgrep](https://semgrep.dev) | OWASP Top 10 patterns and insecure coding patterns across Python, JS/TS, Go, Java, Ruby, and more |
