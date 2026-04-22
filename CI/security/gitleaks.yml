@@ -1,0 +1,33 @@
+gitleaks:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install gitleaks
+      run: |
+        GITLEAKS_VERSION="8.18.4"
+        BASE="https://github.com/gitleaks/gitleaks/releases/download"
+        FILE="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+        curl -sSfL "${BASE}/v${GITLEAKS_VERSION}/${FILE}" \
+          | tar -xz -C /usr/local/bin gitleaks
+
+    - name: Run gitleaks
+      run: |
+        set -euo pipefail
+
+        if ! command -v gitleaks &> /dev/null; then
+          echo "::error::gitleaks not found. Install it before running this script."
+          exit 1
+        fi
+
+        echo "ℹ️ Running gitleaks on the repository..."
+
+        if gitleaks detect --source . --no-banner --redact; then
+          echo "No secrets found"
+          exit 0
+        else
+          echo "gitleaks found potential secrets"
+          exit 1
+        fi

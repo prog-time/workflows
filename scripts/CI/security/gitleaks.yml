@@ -1,0 +1,17 @@
+gitleaks:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install gitleaks
+      run: |
+        GITLEAKS_VERSION="8.18.4"
+        BASE="https://github.com/gitleaks/gitleaks/releases/download"
+        FILE="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+        curl -sSfL "${BASE}/v${GITLEAKS_VERSION}/${FILE}" \
+          | tar -xz -C /usr/local/bin gitleaks
+
+    - name: Run gitleaks
+      run: bash scripts/shell/security/gitleaks.sh
