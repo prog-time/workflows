@@ -1,0 +1,49 @@
+phpcs:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: "8.2"
+
+    - name: Cache Composer
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: composer-${{ hashFiles('composer.lock') }}
+        restore-keys: composer-
+
+    - name: Install dependencies
+      run: composer install --no-interaction --prefer-dist
+
+    - name: Run phpcs
+      run: |
+        set -euo pipefail
+
+        CONFIG_FOUND=0
+        for cfg in phpcs.xml phpcs.xml.dist .phpcs.xml .phpcs.xml.dist; do
+          if [[ -f "$cfg" ]]; then
+            CONFIG_FOUND=1
+            break
+          fi
+        done
+
+        if [[ $CONFIG_FOUND -eq 0 ]]; then
+          echo "::error::No phpcs ruleset found (expected phpcs.xml, phpcs.xml.dist, .phpcs.xml, or .phpcs.xml.dist)"
+          exit 1
+        fi
+
+        if [[ -x "vendor/bin/phpcs" ]]; then
+          PHPCS="vendor/bin/phpcs"
+        else
+          PHPCS="phpcs"
+        fi
+
+        if "$PHPCS"; then
+          echo "✅ phpcs passed"
+        else
+          echo "❌ phpcs found issues"
+          exit 1
+        fi

@@ -20,6 +20,7 @@ that projects compose into their own workflows.
 | ktlint | linters | [CI/linters/ktlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/ktlint.yml) |
 | markdownlint | linters | [CI/linters/markdownlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/markdownlint.yml) |
 | mermaid-cli | linters | [CI/linters/mermaid.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/mermaid.yml) |
+| phpcs | linters | [CI/linters/phpcs.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/phpcs.yml) |
 | RuboCop | linters | [CI/linters/rubocop.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/rubocop.yml) |
 | Ruff | linters | [CI/linters/ruff.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/ruff.yml) |
 | ShellCheck | linters | [CI/linters/shellcheck.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/shellcheck.yml) |
@@ -77,6 +78,7 @@ Workflows/
 │   │   │   ├── ktlint.yml
 │   │   │   ├── markdownlint.yml
 │   │   │   ├── mermaid.yml
+│   │   │   ├── phpcs.yml
 │   │   │   ├── rubocop.yml
 │   │   │   ├── ruff.yml
 │   │   │   ├── shellcheck.yml
@@ -107,6 +109,7 @@ Workflows/
 │       │   ├── ktlint.sh
 │       │   ├── markdownlint.sh
 │       │   ├── mermaid.sh
+│       │   ├── phpcs.sh
 │       │   ├── rubocop.sh
 │       │   ├── ruff.sh
 │       │   ├── shellcheck.sh
@@ -131,6 +134,7 @@ Workflows/
 │   │   ├── hadolint.bats
 │   │   ├── htmlhint.bats
 │   │   ├── markdownlint.bats
+│   │   ├── phpcs.bats
 │   │   ├── shellcheck.bats
 │   │   ├── stylelint.bats
 │   │   └── yamllint.bats
@@ -226,6 +230,7 @@ shellcheck:
 | `CI/linters/ktlint.yml` | [ktlint](https://pinterest.github.io/ktlint) | Kotlin |
 | `CI/linters/markdownlint.yml` | [markdownlint](https://github.com/DavidAnson/markdownlint) | Markdown files |
 | `CI/linters/mermaid.yml` | [mermaid-cli](https://github.com/mermaid-js/mermaid-cli) | Mermaid diagrams |
+| `CI/linters/phpcs.yml` | [phpcs](https://github.com/PHPCSStandards/PHP_CodeSniffer) | PHP (PSR-12 and custom rulesets) |
 | `CI/linters/rubocop.yml` | [rubocop](https://rubocop.org) | Ruby |
 | `CI/linters/ruff.yml` | [ruff](https://docs.astral.sh/ruff) | Python |
 | `CI/linters/shellcheck.yml` | [shellcheck](https://www.shellcheck.net) | Shell scripts |
