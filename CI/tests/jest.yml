@@ -1,0 +1,49 @@
+jest:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Cache node_modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: node-${{ hashFiles('package-lock.json') }}
+        restore-keys: node-
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run Jest
+      run: |
+        set -euo pipefail
+
+        CONFIG_FOUND=0
+
+        if [ -f "package.json" ]; then
+          if grep -q '"jest"' package.json; then
+            CONFIG_FOUND=1
+          fi
+          for config in "jest.config.js" "jest.config.ts" "jest.config.mjs" "jest.config.cjs"; do
+            if [ -f "$config" ]; then
+              CONFIG_FOUND=1
+              break
+            fi
+          done
+        fi
+
+        if [ $CONFIG_FOUND -eq 0 ]; then
+          echo "::error::No Jest configuration found"
+          exit 1
+        fi
+
+        if npx jest --ci --runInBand --passWithNoTests; then
+          echo "✅ Jest tests passed"
+        else
+          echo "❌ Jest tests failed"
+          exit 1
+        fi
