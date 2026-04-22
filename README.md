@@ -33,6 +33,7 @@ that projects compose into their own workflows.
 | mermaid-cli | build | [CI/build/mermaid.yml](https://github.com/prog-time/workflows/blob/main/CI/build/mermaid.yml) |
 | BATS | tests | [CI/tests/bats.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/bats.yml) |
 | go test | tests | [CI/tests/go_test.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/go_test.yml) |
+| Jest | tests | [CI/tests/jest.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/jest.yml) |
 | Laravel | tests | [CI/tests/laravel_tests.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/laravel_tests.yml) |
 | pytest | tests | [CI/tests/pytest.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/pytest.yml) |
 | RSpec | tests | [CI/tests/rspec.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/rspec.yml) |
@@ -96,6 +97,7 @@ Workflows/
 │   │   └── tests/
 │   │       ├── bats.yml
 │   │       ├── go_test.yml
+│   │       ├── jest.yml
 │   │       ├── laravel_tests.yml
 │   │       ├── pytest.yml
 │   │       └── rspec.yml
@@ -116,10 +118,12 @@ Workflows/
 │       │   ├── stylelint.sh
 │       │   ├── swiftlint.sh
 │       │   └── yamllint.sh
-│       └── security/
-│           ├── gitleaks.sh
-│           ├── semgrep.sh
-│           └── trivy.sh
+│       ├── security/
+│       │   ├── gitleaks.sh
+│       │   ├── semgrep.sh
+│       │   └── trivy.sh
+│       └── tests/
+│           └── jest.sh
 │
 ├── CI/                             # assembled output (ready to use)
 │   ├── linters/
@@ -142,6 +146,8 @@ Workflows/
 │   │   ├── gitleaks.bats
 │   │   ├── semgrep.bats
 │   │   └── trivy.bats
+│   ├── tests/
+│   │   └── jest.bats
 │   └── helpers/
 │       └── common.bash             # shared test utilities (mocks, temp dirs)
 │
@@ -252,6 +258,7 @@ shellcheck:
 |---------|--------------|
 | `CI/tests/bats.yml` | BATS tests (`tests/` directory) |
 | `CI/tests/go_test.yml` | Go test suite (`go test ./...`) |
+| `CI/tests/jest.yml` | JavaScript/TypeScript test suite (Jest) |
 | `CI/tests/laravel_tests.yml` | Laravel test suite (PHP 8.2, SQLite, parallel) |
 | `CI/tests/pytest.yml` | Python test suite (pytest) |
 | `CI/tests/rspec.yml` | Ruby test suite (RSpec via Bundler) |
