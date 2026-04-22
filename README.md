@@ -10,6 +10,7 @@ that projects compose into their own workflows.
 | Tool | Category | File |
 |------|----------|------|
 | gitleaks | security | [CI/security/gitleaks.yml](https://github.com/prog-time/workflows/blob/main/CI/security/gitleaks.yml) |
+| trivy | security | [CI/security/trivy.yml](https://github.com/prog-time/workflows/blob/main/CI/security/trivy.yml) |
 | ESLint | linters | [CI/linters/eslint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/eslint.yml) |
 | golangci-lint | linters | [CI/linters/golangci-lint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/golangci-lint.yml) |
 | Hadolint | linters | [CI/linters/hadolint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/hadolint.yml) |
@@ -80,7 +81,8 @@ Workflows/
 │   │   │   ├── swiftlint.yml
 │   │   │   └── yamllint.yml
 │   │   ├── security/
-│   │   │   └── gitleaks.yml
+│   │   │   ├── gitleaks.yml
+│   │   │   └── trivy.yml
 │   │   ├── static_analysis/
 │   │   │   ├── mypy.yml
 │   │   │   ├── phpstan.yml
@@ -107,7 +109,8 @@ Workflows/
 │       │   ├── swiftlint.sh
 │       │   └── yamllint.sh
 │       └── security/
-│           └── gitleaks.sh
+│           ├── gitleaks.sh
+│           └── trivy.sh
 │
 ├── CI/                             # assembled output (ready to use)
 │   ├── linters/
@@ -125,7 +128,8 @@ Workflows/
 │   │   ├── stylelint.bats
 │   │   └── yamllint.bats
 │   ├── security/
-│   │   └── gitleaks.bats
+│   │   ├── gitleaks.bats
+│   │   └── trivy.bats
 │   └── helpers/
 │       └── common.bash             # shared test utilities (mocks, temp dirs)
 │
@@ -199,6 +203,7 @@ shellcheck:
 | Snippet | Tool | What it checks |
 |---------|------|----------------|
 | `CI/security/gitleaks.yml` | [gitleaks](https://github.com/gitleaks/gitleaks) | Hardcoded secrets, tokens, and API keys |
+| `CI/security/trivy.yml` | [trivy](https://github.com/aquasecurity/trivy) | CVEs in OS packages, container images, and dependency manifests |
 
 ### Linters
 
