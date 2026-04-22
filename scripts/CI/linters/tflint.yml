@@ -1,0 +1,11 @@
+tflint:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+
+    - uses: terraform-linters/setup-tflint@v4
+      with:
+        tflint_version: v0.55.0
+
+    - name: Run tflint on Terraform files
+      run: bash scripts/shell/linters/tflint.sh
