@@ -10,8 +10,9 @@ that projects compose into their own workflows.
 | Tool | Category | File |
 |------|----------|------|
 | gitleaks | security | [CI/security/gitleaks.yml](https://github.com/prog-time/workflows/blob/main/CI/security/gitleaks.yml) |
-| trivy | security | [CI/security/trivy.yml](https://github.com/prog-time/workflows/blob/main/CI/security/trivy.yml) |
+| pip-audit | security | [CI/security/pip-audit.yml](https://github.com/prog-time/workflows/blob/main/CI/security/pip-audit.yml) |
 | semgrep | security | [CI/security/semgrep.yml](https://github.com/prog-time/workflows/blob/main/CI/security/semgrep.yml) |
+| trivy | security | [CI/security/trivy.yml](https://github.com/prog-time/workflows/blob/main/CI/security/trivy.yml) |
 | Clippy | linters | [CI/linters/clippy.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/clippy.yml) |
 | ESLint | linters | [CI/linters/eslint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/eslint.yml) |
 | golangci-lint | linters | [CI/linters/golangci-lint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/golangci-lint.yml) |
@@ -92,6 +93,7 @@ Workflows/
 │   │   │   └── yamllint.yml
 │   │   ├── security/
 │   │   │   ├── gitleaks.yml
+│   │   │   ├── pip-audit.yml
 │   │   │   ├── semgrep.yml
 │   │   │   └── trivy.yml
 │   │   ├── static_analysis/
@@ -126,6 +128,7 @@ Workflows/
 │       │   └── yamllint.sh
 │       ├── security/
 │       │   ├── gitleaks.sh
+│       │   ├── pip-audit.sh
 │       │   ├── semgrep.sh
 │       │   └── trivy.sh
 │       └── tests/
@@ -152,6 +155,7 @@ Workflows/
 │   │   └── yamllint.bats
 │   ├── security/
 │   │   ├── gitleaks.bats
+│   │   ├── pip-audit.bats
 │   │   ├── semgrep.bats
 │   │   └── trivy.bats
 │   ├── tests/
@@ -229,8 +233,9 @@ shellcheck:
 | Snippet | Tool | What it checks |
 |---------|------|----------------|
 | `CI/security/gitleaks.yml` | [gitleaks](https://github.com/gitleaks/gitleaks) | Hardcoded secrets, tokens, and API keys |
-| `CI/security/trivy.yml` | [trivy](https://github.com/aquasecurity/trivy) | CVEs in OS packages, container images, and dependency manifests |
+| `CI/security/pip-audit.yml` | [pip-audit](https://github.com/pypa/pip-audit) | CVEs in Python dependencies via the PyPI Advisory Database |
 | `CI/security/semgrep.yml` | [semgrep](https://semgrep.dev) | OWASP Top 10 patterns and insecure coding patterns across Python, JS/TS, Go, Java, Ruby, and more |
+| `CI/security/trivy.yml` | [trivy](https://github.com/aquasecurity/trivy) | CVEs in OS packages, container images, and dependency manifests |
 
 ### Linters
 
