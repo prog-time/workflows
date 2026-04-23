@@ -42,6 +42,7 @@ that projects compose into their own workflows.
 | Laravel | tests | [CI/tests/laravel_tests.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/laravel_tests.yml) |
 | pytest | tests | [CI/tests/pytest.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/pytest.yml) |
 | RSpec | tests | [CI/tests/rspec.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/rspec.yml) |
+| xcodebuild test | tests | [CI/tests/xcodebuild_test.yml](https://github.com/prog-time/workflows/blob/main/CI/tests/xcodebuild_test.yml) (**macos-latest**) |
 
 ---
 
@@ -110,7 +111,8 @@ Workflows/
 │   │       ├── jest.yml
 │   │       ├── laravel_tests.yml
 │   │       ├── pytest.yml
-│   │       └── rspec.yml
+│   │       ├── rspec.yml
+│   │       └── xcodebuild_test.yml
 │   └── shell/                      # bash scripts (one per tool)
 │       ├── linters/
 │       │   ├── clippy.sh
@@ -138,7 +140,8 @@ Workflows/
 │       │   └── trivy.sh
 │       └── tests/
 │           ├── cargo_test.sh
-│           └── jest.sh
+│           ├── jest.sh
+│           └── xcodebuild_test.sh
 │
 ├── CI/                             # assembled output (ready to use)
 │   ├── linters/
@@ -167,7 +170,8 @@ Workflows/
 │   │   └── trivy.bats
 │   ├── tests/
 │   │   ├── cargo_test.bats
-│   │   └── jest.bats
+│   │   ├── jest.bats
+│   │   └── xcodebuild_test.bats
 │   └── helpers/
 │       └── common.bash             # shared test utilities (mocks, temp dirs)
 │
@@ -287,6 +291,7 @@ shellcheck:
 | `CI/tests/laravel_tests.yml` | Laravel test suite (PHP 8.2, SQLite, parallel) |
 | `CI/tests/pytest.yml` | Python test suite (pytest) |
 | `CI/tests/rspec.yml` | Ruby test suite (RSpec via Bundler) |
+| `CI/tests/xcodebuild_test.yml` | Swift/iOS XCTest suite (`xcodebuild test` via xcpretty) — **macOS only** |
 
 ---
 

@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Guard: xcodebuild must be present
+if ! command -v xcodebuild &>/dev/null; then
+  echo "::error::xcodebuild not found — this job must run on macos-latest"
+  exit 1
+fi
+
+# Guard: xcpretty must be present
+if ! command -v xcpretty &>/dev/null; then
+  echo "::error::xcpretty not found — run: gem install xcpretty"
+  exit 1
+fi
+
+# Locate workspace or project at repo root (bash-3.2-safe — no mapfile)
+workspace_count=0
+project_count=0
+found_path=""
+
+for f in *.xcworkspace; do
+  [ -e "$f" ] || continue
+  workspace_count=$((workspace_count + 1))
+  found_path="$f"
+done
+
+for f in *.xcodeproj; do
+  [ -e "$f" ] || continue
+  project_count=$((project_count + 1))
+  found_path="$f"
+done
+
+total_count=$((workspace_count + project_count))
+
+if [ "$total_count" -eq 0 ]; then
+  echo "::error::No Xcode workspace or project found"
+  exit 1
+fi
+
+if [ "$total_count" -gt 1 ]; then
+  echo "::error::Multiple Xcode workspaces/projects found (specify via SCHEME/PROJECT env)"
+  exit 1
+fi
+
+# Resolve scheme: honour env var, fall back to basename without extension
+if [ -z "${SCHEME:-}" ]; then
+  basename_no_ext="${found_path%.*}"
+  SCHEME="$basename_no_ext"
+fi
+
+echo "ℹ️ Running xcodebuild test — scheme: $SCHEME"
+
+xcodebuild test \
+  -scheme "$SCHEME" \
+  -destination 'platform=iOS Simulator,name=iPhone 15' \
+  | xcpretty \
+  && echo "✅ xcodebuild tests passed" \
+  || { echo "❌ xcodebuild tests failed"; exit 1; }
