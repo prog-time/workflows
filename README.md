@@ -172,8 +172,13 @@ Workflows/
 │   │   ├── cargo_test.bats
 │   │   ├── jest.bats
 │   │   └── xcodebuild_test.bats
+│   ├── dependabot/
+│   │   └── dependabot.bats         # validates the Dependabot template
 │   └── helpers/
 │       └── common.bash             # shared test utilities (mocks, temp dirs)
+│
+├── dependabot/
+│   └── dependabot.yml              # Dependabot config template (copy to .github/)
 │
 └── rules/                          # living documentation for contributors
     ├── README.md
@@ -320,6 +325,31 @@ jobs:
   phpstan:           # paste content of CI/static_analysis/phpstan.yml here
     ...
 ```
+
+---
+
+## Dependabot template
+
+`dependabot/dependabot.yml` is a ready-to-copy [Dependabot](https://docs.github.com/en/code-security/dependabot)
+configuration template. Unlike the CI snippets in `CI/`, this file is not a GitHub Actions job — it is a
+repository-level configuration that GitHub reads natively from `.github/dependabot.yml`.
+
+**This artefact does not follow the three-layer pattern** (`shell → source YAML → assembled YAML`). There is
+no shell script or assembler step. Copy the file directly into your project's `.github/` directory.
+
+### Usage
+
+```bash
+cp dependabot/dependabot.yml <your-project>/.github/dependabot.yml
+```
+
+The template enables weekly automated dependency-update PRs for seven ecosystems:
+`github-actions`, `npm`, `pip`, `bundler`, `composer`, `cargo`, and `gomod`.
+Each entry uses `open-pull-requests-limit: 5` and a stable `commit-message` prefix so the
+resulting PRs are easy to filter and review.
+
+Adjust the `directory` field per entry if your dependency manifests live in a subdirectory
+rather than the repository root.
 
 ---
 
