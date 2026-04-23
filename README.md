@@ -291,7 +291,7 @@ shellcheck:
 | `CI/tests/laravel_tests.yml` | Laravel test suite (PHP 8.2, SQLite, parallel) |
 | `CI/tests/pytest.yml` | Python test suite (pytest) |
 | `CI/tests/rspec.yml` | Ruby test suite (RSpec via Bundler) |
-| `CI/tests/xcodebuild_test.yml` | Swift/iOS XCTest suite (`xcodebuild test` via xcpretty) — **must run on `macos-latest`** |
+| `CI/tests/xcodebuild_test.yml` | Swift/iOS XCTest suite (`xcodebuild test` via xcpretty) — **macOS only** |
 
 ---
 
