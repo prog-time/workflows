@@ -10,6 +10,7 @@ that projects compose into their own workflows.
 | Tool | Category | File |
 |------|----------|------|
 | bundler-audit | security | [CI/security/bundler-audit.yml](https://github.com/prog-time/workflows/blob/main/CI/security/bundler-audit.yml) |
+| composer-audit | security | [CI/security/composer-audit.yml](https://github.com/prog-time/workflows/blob/main/CI/security/composer-audit.yml) |
 | gitleaks | security | [CI/security/gitleaks.yml](https://github.com/prog-time/workflows/blob/main/CI/security/gitleaks.yml) |
 | pip-audit | security | [CI/security/pip-audit.yml](https://github.com/prog-time/workflows/blob/main/CI/security/pip-audit.yml) |
 | semgrep | security | [CI/security/semgrep.yml](https://github.com/prog-time/workflows/blob/main/CI/security/semgrep.yml) |
