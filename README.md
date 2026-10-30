@@ -23,6 +23,7 @@ that projects compose into their own workflows.
 | markdownlint | linters | [CI/linters/markdownlint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/markdownlint.yml) |
 | mermaid-cli | linters | [CI/linters/mermaid.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/mermaid.yml) |
 | phpcs | linters | [CI/linters/phpcs.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/phpcs.yml) |
+| Pint | linters | [CI/linters/pint.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/pint.yml) |
 | RuboCop | linters | [CI/linters/rubocop.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/rubocop.yml) |
 | Ruff | linters | [CI/linters/ruff.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/ruff.yml) |
 | ShellCheck | linters | [CI/linters/shellcheck.yml](https://github.com/prog-time/workflows/blob/main/CI/linters/shellcheck.yml) |
